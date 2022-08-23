@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ArticlesRepository;
+
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -33,7 +34,10 @@ class Articles
     #[ORM\Column]
     #[Assert\NotBlank()]
     private ?\DateTimeImmutable $createdAt = null;
-
+public function __construct()
+{
+    $this->createdAt =new \DateTimeImmutable();
+}
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $modifiedAt = null;
 
