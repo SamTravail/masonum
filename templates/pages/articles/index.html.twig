@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maso-Numérique  -Articles
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-4">
+		<h1>
+			Les Trucs et Astuces</h1>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Numéro</th>
+					<th scope="col">Titre</th>
+					<th scope="col">Contenu</th>
+					<th scope="col">Auteur</th>
+					<th scope="col">Date de publication</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for article in articles %}
+					<div>
+						<tr class="table-info">
+							<th scope="row">{{article.id}}</th>
+							<td>{{article.title}}</td>
+							<td>{{article.content}}</td>
+							<td>{{article.auteur}}</td>
+							<td>{{article.createdAt|date('dd/mm/yyyy')}}</td>
+                            {# |date('dd/mm/yyyy') filtre obligatoire pour que la date soit interrprétée par twig #}
+						</tr>
+					</div>
+
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</div>
+{% endblock %}
