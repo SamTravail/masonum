@@ -26,9 +26,12 @@
 							<td>{{article.title}}</td>
 							<td>{{article.content}}</td>
 							<td>{{article.auteur}}</td>
-							<td>{{article.createdAt|date('dd/mm/yyyy')}}</td>
-                            {# |date('dd/mm/yyyy') filtre obligatoire pour que la date soit interrprétée par twig #}
+							<td>{{article.createdAt|date('d/m/Y')}}</td>
+                            {# |date('d/m/yy') filtre obligatoire pour que la date soit interrprétée par twig #}
 						</tr>
+                        <div class="navigation">
+ 
+</div>
 					</div>
 
 				{% endfor %}

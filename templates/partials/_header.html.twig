@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-info">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">MN Maso-Numérique</a>
@@ -11,24 +12,33 @@
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
+        
+      <!-- Example single danger button -->
+<div class="btn-group">
+ <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown link
+  </a
+  <ul class="dropdown-menu">
+    <li class="dropdown-item" href="#">Front-end<ul class="dropdown-menu">
+    <li class="dropdown-item" href="#">HTML</li>
+     <li class="dropdown-item" href="#">CSS</li>
+    <li class="dropdown-item" href="#">Framworks</li> </li>
+    <li class="dropdown-item" href="#">Back-end</li>    
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="#">Autre</a></li>
+  </ul>
+</div>
+        
         <li class="nav-item">
-          <a class="nav-link " href="{{ path('app_cours') }}">Cours</a>
+          <a class="nav-link" href="{{ path('app_articles') }}">Astuces</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Astuces</a>
+          <a class="nav-link" href="#">Inscris toi</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">FAQ</a>
+          <a class="nav-link" href="#">logg toi</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Catégories</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Feuilles de style</a>
-            <a class="dropdown-item" href="#">Languages de programmation</a>
-            <a class="dropdown-item" href="#">Frameworks</a>
-            <div class="dropdown-divider"></div>           
-          </div>
-        </li>
+        
       </ul>
       <form class="d-flex">
         <input class="form-control me-sm-2" type="text" placeholder="Search">
