@@ -4,39 +4,55 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-4">
-		<h1>
-			Les Trucs et Astuces</h1>
+	<div
+		class="container mt-4">
+		{# condition pour dire si il y a un  ou plusieurs articles ont les affiche sinon on affiche un message indiquant qu'il n 'y a pas d'article #}
+		{% if not articles.items is same as ([]) %}
+			<h1>
+				Les Trucs et Astuces</h1>
+			{# vatiable pour indiquer le nombre d'article #}
+			<div class="count mt-4">
+				Il y a
+				{{ articles.getTotalItemCount }}
+				articles.
+			</div>
+			{# tavleau pour ranger les articles le premier déclare le tableau le deuxième injecte les datas #}
+			<table class="table table-hover mt-4">
+				<thead>
+					<tr>
+						<th scope="col">Numéro</th>
+						<th scope="col">Titre</th>
+						<th scope="col">Contenu</th>
+						<th scope="col">Auteur</th>
+						<th scope="col">Date de publication</th>
+					</tr>
+				</thead>
+				<tbody>
+					{# Création d'un boucle pour afficher tous les articles #}
+					{% for article in articles %}
+						<div>
+							<tr class="table-info mt-4">
+								<th scope="row">{{article.id}}</th>
+								<td>{{article.title}}</td>
+								<td>{{article.content}}</td>
+								<td>{{article.auteur}}</td>
+								<td>{{article.createdAt|date('d/m/Y')}}</td>
+								{# |date('d/m/yy') filtre obligatoire pour que la date soit interrprétée par twig #}
+							</tr>
+							<div class="navigation"></div>
+						</div>
 
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th scope="col">Numéro</th>
-					<th scope="col">Titre</th>
-					<th scope="col">Contenu</th>
-					<th scope="col">Auteur</th>
-					<th scope="col">Date de publication</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for article in articles %}
-					<div>
-						<tr class="table-info">
-							<th scope="row">{{article.id}}</th>
-							<td>{{article.title}}</td>
-							<td>{{article.content}}</td>
-							<td>{{article.auteur}}</td>
-							<td>{{article.createdAt|date('d/m/Y')}}</td>
-                            {# |date('d/m/yy') filtre obligatoire pour que la date soit interrprétée par twig #}
-						</tr>
-                        <div class="navigation">
- 
-</div>
-					</div>
-
-				{% endfor %}
-			</tbody>
-		</table>
-
+					{% endfor %}
+				</tbody>
+			</table>
+			{# pagination #}
+			<div class="navigation-info mt-4">
+				{{ knp_pagination_render(articles) }}
+			</div>
+		{% else %}
+			{# fin de la condition si il n'y a pas d'article #}
+			<h4>
+				Il n'y a pas d'ingrédients</h4>
+		{% endif %}
 	</div>
 {% endblock %}

@@ -21,12 +21,15 @@ class ArticlesController extends AbstractController
         $articles = $paginator->paginate(
             $repository->findAll(),
             $request->query->getInt('page', 1),
-            10
+            5,
+            
         );
 
         
         return $this->render('pages/articles/index.html.twig', [
            'articles'=>$articles 
+          
         ]);
+         
     }
 }
