@@ -5,10 +5,11 @@ namespace App\Entity;
 use App\Repository\ArticlesRepository;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticlesRepository::class)]
+#[UniqueEntity('title', 'content')]
 class Articles
 {
     #[ORM\Id]
@@ -21,9 +22,9 @@ class Articles
     #[Assert\Length(min: 2, max: 50)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 1000)]
+    #[ORM\Column(length: 10000)]
     #[Assert\NotBlank()]
-    #[Assert\Length(min: 50, max: 1000)]
+    #[Assert\Length(min: 50, max: 10000)]
     private ?string $content = null;
 
     #[ORM\Column(length: 50)]
