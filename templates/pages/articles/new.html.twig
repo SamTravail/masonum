@@ -7,13 +7,31 @@
 <h1 class="mt-4"> Ecris-moi un bon cours</h1>
 <h4 class="mt-4"> Attention il doit-être accessible à tous ... même ta grand-mère doit le comprendre.</h4>
   <hr class="my-4">
-  {% for message in app.flashes('danger') %}
-<div class='alert alert-danger mt-4'>
-{{message}}
-</div>
-{% endfor %}
+ 
 <img src="https://i.pinimg.com/236x/27/fc/bf/27fcbf81a03217f5fa6760e48e989b89.jpg" class="rounded mx-auto d-block" alt="...">  <hr class="my-4">
+{{ form(form) }}
+{# {{ form_start(form)}}
 
-{{ form(form)}}
+<div class="form-group">
+{{ form_label(form.title) }}
+{{ form_widget(form.title) }}
+<div class="form-error alert-dismissible alert-danger">
+{{ form_errors(form.title) }}
 </div>
+</div>
+<div class="form-group">
+{{ form_label(form.content) }}
+{{ form_widget(form.content) }}
+<div class="form-error alert-dismissible alert-danger">
+{{ form_errors(form.content) }}
+</div>
+</div>
+<div class="form-group">
+{{ form_label(form.auteur) }}
+{{ form_widget(form.auteur) }}
+</div>
+<div class="form-group">
+{{ form_row(form.submit) }}
+</div>
+</div> #}
 {% endblock  %}

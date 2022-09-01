@@ -9,7 +9,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticlesRepository::class)]
-#[UniqueEntity('title', 'content')]
+#[UniqueEntity('title', 'Le titre est déja utilisé. Merci de changer.')]
+#[UniqueEntity('content', 'Mais t\'es grave toi ! Deux fois le même contenu c\'est louche... Recommence !!!!')]
+
 class Articles
 {
     #[ORM\Id]

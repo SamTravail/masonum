@@ -70,7 +70,7 @@ class ArticleType extends AbstractType
             ->add('submit', SubmitType::class,[
                 'attr' => [  
                     'class' => 'btn btn-danger mt-4'],
-                    'label' => 'Partager mon savoir'
+                    'label' => 'Envoyer'
             ])
             
         ;
