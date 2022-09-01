@@ -55,7 +55,7 @@ class ArticlesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $article = $form->getData();
-            dd($article);
+          
             // persist = on met dans la boite
             $manager->persist($article);
             //    flush on envoie vers la bdd
@@ -111,7 +111,9 @@ class ArticlesController extends AbstractController
       $this->addFlash(
         'danger',
         'Hop poubelle ! Bon débarras!! '
+        
     );
+    
     
       return $this->redirectToRoute('app_articles');
     }

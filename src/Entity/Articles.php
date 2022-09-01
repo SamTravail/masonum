@@ -36,12 +36,15 @@ class Articles
 
     #[ORM\Column]
     #[Assert\NotBlank()]
+
+    
     private ?\DateTimeImmutable $createdAt = null;
 public function __construct()
 {
     $this->createdAt =new \DateTimeImmutable();
 }
     #[ORM\Column(nullable: true)]
+    
     private ?\DateTimeImmutable $modifiedAt = null;
 
     public function getId(): ?int

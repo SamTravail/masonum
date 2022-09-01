@@ -71,14 +71,12 @@ class ArticleType extends AbstractType
                 'attr' => [  
                     'class' => 'btn btn-danger mt-4'],
                     'label' => 'Envoyer'
-            ])
-            
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults([            
             'data_class' => Articles::class,
         ]);
     }
