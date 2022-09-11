@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\EntityListener;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -11,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\EntityListeners(['App\EntityListener\UserListener'])]
 #[UniqueEntity('email', 'Change de nom ma poule, c\'est déjà utilisé !')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

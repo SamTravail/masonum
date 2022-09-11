@@ -96,7 +96,7 @@ class ArticlesController extends AbstractController
             );
             return $this->redirectToRoute('app_articles');
         }
-        return $this->render('pages/articles/new.html.twig', [
+        return $this->render('pages/articles/edit.html.twig', [
             'form' => $form->createView()
         ]);
     }

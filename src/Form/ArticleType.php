@@ -17,66 +17,76 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TypeTextType::class,
-            [
-                'attr' => [
-                    'class' => 'form-control',
-                    'minlength' => '2',
-                    'maxlength' => '50'
-                ],
-                'label' => 'Titre',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\Length(['min'=>'2','max' =>'50']),
-                    new Assert\NotBlank()
+            ->add(
+                'title',
+                TypeTextType::class,
+                [
+                    'attr' => [
+                        'class' => 'form-control',
+                        'minlength' => '2',
+                        'maxlength' => '50'
+                    ],
+                    'label' => 'Titre',
+                    'label_attr' => [
+                        'class' => 'form-label mt-4'
+                    ],
+                    'constraints' => [
+                        new Assert\Length(['min' => '2', 'max' => '50']),
+                        new Assert\NotBlank()
+                    ]
                 ]
-            ])
-            
-            ->add('content', TextareaType::class,
-            [
-                'attr' => [
-                    'class' => 'form-control',
-                    'minlength' => '200',
-                    'maxlength' => '200000'
-                ],
-                'label' => 'Contenu',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\Length(['min'=>'200','max' =>'200000']),
-                    new Assert\NotBlank()
+            )
+
+            ->add(
+                'content',
+                TextareaType::class,
+                [
+                    'attr' => [
+                        'class' => 'form-control',
+                        'minlength' => '200',
+                        'maxlength' => '200000'
+                    ],
+                    'label' => 'Contenu',
+                    'label_attr' => [
+                        'class' => 'form-label mt-4'
+                    ],
+                    'constraints' => [
+                        new Assert\Length(['min' => '200', 'max' => '200000']),
+                        new Assert\NotBlank()
+                    ]
                 ]
-            ])
-            
-            ->add('auteur', TypeTextType::class,
-            [
-                'attr' => [
-                    'class' => 'form-control',
-                    'minlength' => '2',
-                    'maxlength' => '50'
-                ],
-                'label' => 'Auteur',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\Length(['min'=>'2','max' =>'50']),
-                    new Assert\NotBlank()
+            )
+
+            ->add(
+                'auteur',
+                TypeTextType::class,
+                [
+                    'attr' => [
+                        'class' => 'form-control',
+                        'minlength' => '2',
+                        'maxlength' => '50'
+                    ],
+                    'label' => 'Auteur',
+                    'label_attr' => [
+                        'class' => 'form-label mt-4'
+                    ],
+                    'constraints' => [
+                        new Assert\Length(['min' => '2', 'max' => '50']),
+                        new Assert\NotBlank()
+                    ]
                 ]
-            ])
-            ->add('submit', SubmitType::class,[
-                'attr' => [  
-                    'class' => 'btn btn-danger mt-4'],
-                    'label' => 'Envoyer'
+            )
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-danger mt-4'
+                ],
+                'label' => 'Envoyer'
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([            
+        $resolver->setDefaults([
             'data_class' => Articles::class,
         ]);
     }
