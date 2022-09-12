@@ -19,12 +19,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
+    private ?int $id;
 
     #[ORM\Column(type: 'string', length: 50)]
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 50)]
-    private ?string $fullName = null;
+    private ?string $fullName;
 
     #[ORM\Column(type: 'string', length: 50, nullable: true)]    
     #[Assert\Length(min: 2, max: 50)]
@@ -34,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string',length: 180, unique: true)]   
     #[Assert\Email()] 
     #[Assert\Length(min: 2, max: 180)]
-    private ?string $email = null;
+    private ?string $email;
 
     #[ORM\Column]
     #[Assert\NotNull()] 
@@ -45,11 +45,11 @@ private ?string $plainPassword = null;
      */
     #[ORM\Column]
     #[Assert\NotBlank()]
-    private ?string $password = null;
+    private string $password = 'password';
     
     #[ORM\Column]
     #[Assert\NotNull()] 
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $createdAt ;
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
