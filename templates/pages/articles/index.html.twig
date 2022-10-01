@@ -14,11 +14,17 @@
 				{# création bouton écrire un article on met un path pour si l'adresse change automatiquement la route change sans erreur #}
 				<a href="{{ path('articles.new') }}" class="btn btn-info">Ecrire un nouvel Article</a>
 			{# alerte pour iindiquer que l'article a été créé avec succès #}
-			{% for message in app.flashes('danger') %}
+			{% for message in app.flashes('success') %}
 				<div class='alert alert-danger mt-4'>
 					{{message}}
 				</div>
 			{% endfor %}
+			{% for message in app.flashes('warning') %}
+				<div class='alert alert-danger mt-4'>
+					{{message}}
+				</div>
+			{% endfor %}
+			
 			{# vatiable pour indiquer le nombre d'article #}
 			<div class="count mt-4">
 				Il y a
