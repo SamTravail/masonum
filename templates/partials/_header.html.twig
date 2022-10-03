@@ -7,18 +7,14 @@
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav me-auto">
 				<li class="nav-item">
-
 					<a class="nav-link active" href="{{ path('home') }}">Accueil
 						<span class="visually-hidden">(current)</span>
 					</a>
-				</li>
-				{# condition si user connecté #}
-				{% if app.user %}
+				</li>			
 
-					<li class="nav-item ">
-						<a class="nav-link" href="{{ path('app_articles') }}">Articles</a>
-					</li>
-				{% endif %}
+				<li class="nav-item ">
+					<a class="nav-link" href="{{ path('app_articles') }}">Articles</a>
+				</li>
 				<div class="btn-group" role="group">
 					<button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Cours
@@ -32,39 +28,61 @@
 						<a class="dropdown-item" href="#">PHP</a>
 						<a class="dropdown-item" href="#">Framework</a>
 					</div>
-				</div>
-			</ul>
-			<div class="d-flex">
-				<ul class="navbar-nav me-auto">
-					{% if app.user %}
-						
+					<li class="nav-item ">
+						<a class="nav-link" href="#">Lexique</a>
+					</li>
+          {# condition si user connecté #}
+		
+						<li class="nav-item ">
+							<a class="nav-link" href="#">Astuces</a>
+						</li>
 						<div class="btn-group" role="group">
-							<button id="btnGroupDrop1" type="button"  class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Salut à toi
-								{{ app.user.fullName }}
+							<button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Jeux pour se défouler
 							</button>
-							<div class="dropdown-menu" aria-labelledby="btnGroupDrop2" style="margin-top:2.5rem; " >
-								<a class="dropdown-item" href="{{ path('app_articles') }}">Mes articles</a>
-								<a class="dropdown-item" href="#">Mes cours</a>
-								<a class="dropdown-item" href="#">Mes astuces</a>
-								<a class="dropdown-item" href="{{ path('app_edit', {id : app.user.id}) }}">Modifier mes informations</a>
-								<a class="dropdown-item" href="{{ path('app_editPassword', {id : app.user.id}) }}">Modifier mon mot de passe</a>
+							<div class="dropdown-menu" aria-labelledby="btnGroupDrop2" style="margin-top:2.5rem; ">
+								<a class="dropdown-item" href="#">Jeu con</a>
+								<a class="dropdown-item" href="#">Jeu très con</a>
+								<a class="dropdown-item" href="#">Jeu hight level</a>
+							</div>
+							<li class="nav-item ">
+								<a class="nav-link" href="#">Communauté</a>
+							</li>
+						
+					</div>
+				</ul>
+				<div class="d-flex">
+					<ul class="navbar-nav me-auto">
+          {# condition si user connecté #}
+						{% if app.user %}
 
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+							<div class="btn-group" role="group">
+								<button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Salut à toi
+									{{ app.user.fullName }}
+								</button>
+								<div class="dropdown-menu" aria-labelledby="btnGroupDrop2" style="margin-top:2.5rem; ">
+									<a class="dropdown-item" href="{{ path('app_articles') }}">Mes articles</a>
+									<a class="dropdown-item" href="#">Mes cours</a>
+									<a class="dropdown-item" href="#">Mes astuces</a>
+									<a class="dropdown-item" href="{{ path('app_edit', {id : app.user.id}) }}">Modifier mes informations</a>
+									<a class="dropdown-item" href="{{ path('app_editPassword', {id : app.user.id}) }}">Modifier mon mot de passe</a>
 
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+
+								</div>
 							</div>
 						</div>
-					</div>
-				{% else %}
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_registration') }}">Inscris-toi</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_login') }}">Connecte-toi</a>
-					</li>
-				{% endif %}
-			</ul>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_registration') }}">Inscris-toi</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_login') }}">Connecte-toi</a>
+						</li>
+					{% endif %}
+				</ul>
 
-		</div>
-	</nav>
+			</div>
+		</nav>

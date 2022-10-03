@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,7 +21,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ArticlesController extends AbstractController
 {
     // Designation de la routte
-    #[Route('/articles', name: 'app_articles')]
+    #[Route('/articles', name: 'app_articles', methods : ['GET'])]
+    // autoriser que les utilisateurs inscris
+    #[IsGranted('ROLE_USER')]
     // Affichage de tous les article dans un pableau sur la page articles
     public function index(
         ArticlesRepository $repository,
@@ -43,6 +47,7 @@ class ArticlesController extends AbstractController
 
         ]);
     }
+    
     // route qui sera marqué dans la barre du navigateur
     #[Route('/articles/nouveau', 'articles.new', methods: ['GET', 'POST'])]
     // création d'un nouvel article et envoie en bdd
@@ -72,8 +77,11 @@ class ArticlesController extends AbstractController
         ]);
     }
     // création d'une fonction pour modifier un article
+     // Seul le redacteur de l'article peut le modifier
+     #[Security("is_granted('ROLE_USER') and user === article.getUser()")]
     // route qui sera marqué dans la barre du navigateur
     #[Route('/articles/edition/{id}', 'articles.edit', methods: ['GET', 'POST'])]
+   
     // Pas la peine de chercher par l'id avec symfony car il le fait en automatique
     //  public function edit(ArticlesRepository $repository, int $id): Response
     public function edit(Articles $article, Request $request, EntityManagerInterface $manager): Response
@@ -103,6 +111,8 @@ class ArticlesController extends AbstractController
 
     // Supprimer un article
     // route du navigateur
+     // Seul le redacteur de l'article peut le supprimer
+     #[Security("is_granted('ROLE_USER') and user === article.getUser()")]
     #[route('/articles/suppression/{id}', 'articles.delete', methods: ['GET'])]
     public function delete( EntityManagerInterface $manager, Articles $article) : Response
     {
