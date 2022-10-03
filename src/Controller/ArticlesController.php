@@ -29,7 +29,7 @@ class ArticlesController extends AbstractController
     ): Response {
         $articles = $paginator->paginate(
             // récupère toutes les données de la bdd
-            $repository->findAll(),
+            $repository->findBy(['user' => $this->getUser()]),
             // on les classe 5 par page
             $request->query->getInt('page', 1),
             5,
@@ -55,7 +55,7 @@ class ArticlesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $article = $form->getData();
-          
+          $article -> setUser( $this-> getUser());
             // persist = on met dans la boite
             $manager->persist($article);
             //    flush on envoie vers la bdd

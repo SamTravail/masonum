@@ -27,18 +27,9 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 50; $i++) {
-
-            $article = new Articles();
-            $article->setTitle($this->faker->word(2))
-                ->setContent($this->faker->word(200))
-                ->setAuteur($this->faker->lastName());
-            $manager->persist($article);
-        }
-
-
-        // users
-        for ($k = 0; $k < 10; $k++) {
+           // users
+           $users = [];
+           for ($k = 0; $k < 10; $k++) {
 
             $user = new User();
             $user->setFullName($this->faker->name())
@@ -46,9 +37,23 @@ class AppFixtures extends Fixture
                 ->setEmail($this->faker->email())
                 ->setRoles(['ROLE_USER'])
                 ->setPlainPassword('password');
-
+            $users[] = $user;
             $manager->persist($user);
         }
+        $articles = [];
+        for ($i = 0; $i < 50; $i++) {
+
+            $article = new Articles();
+            $article->setTitle($this->faker->word(2))
+                ->setContent($this->faker->word(200))
+                ->setAuteur($this->faker->lastName())
+                ->setUser($users[mt_rand(0, count($users)-1)]);
+                $articles[] = $article;
+                $manager->persist($article);
+        }
+
+
+     
         $manager->flush();
     }
 }

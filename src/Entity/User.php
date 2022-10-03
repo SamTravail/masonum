@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\EntityListener;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -50,9 +52,13 @@ private ?string $plainPassword = null;
     #[ORM\Column]
     #[Assert\NotNull()] 
     private ?\DateTimeImmutable $createdAt ;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Articles::class, orphanRemoval: true)]
+    private Collection $articles;
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->articles = new ArrayCollection();
     }        
     
 
@@ -168,6 +174,36 @@ private ?string $plainPassword = null;
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Articles>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getUser() === $this) {
+                $article->setUser(null);
+            }
+        }
 
         return $this;
     }

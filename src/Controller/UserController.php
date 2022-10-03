@@ -73,6 +73,7 @@ class UserController extends AbstractController
                         $choosenUser,
                     $form->getData()['newPassword'])
                 );
+                
 
                 $this->addFlash(
                     'success',
