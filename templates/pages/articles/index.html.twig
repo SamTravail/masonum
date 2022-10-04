@@ -9,7 +9,7 @@
 		{# condition pour dire si il y a un  ou plusieurs articles ont les affiche sinon on affiche un message indiquant qu'il n 'y a pas d'article #}
 		{% if not articles.items is same as ([]) %}
 			<h1>
-				Les Trucs et Astuces</h1>
+				Articles</h1>
 
 				{# création bouton écrire un article on met un path pour si l'adresse change automatiquement la route change sans erreur #}
 				<a href="{{ path('articles.new') }}" class="btn btn-info">Ecrire un nouvel Article</a>
