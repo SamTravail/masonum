@@ -47,7 +47,8 @@ class AppFixtures extends Fixture
             $article->setTitle($this->faker->word(2))
                 ->setContent($this->faker->word(200))
                 ->setAuteur($this->faker->lastName())
-                ->setUser($users[mt_rand(0, count($users)-1)]);
+                ->setUser($users[mt_rand(0, count($users)-1)])
+                ->setIsPublic(mt_rand(0, 1) == 1 ? true : false);
                 $articles[] = $article;
                 $manager->persist($article);
         }

@@ -47,6 +47,14 @@ class ArticlesController extends AbstractController
 
         ]);
     }
+    #[Security("is_granted('ROLE_USER') and (articles.getIsPublic() === true || user === articles.getUser())")]
+    #[Route('/articles/{id}', 'articles.show', methods : ['GET'])]
+    public function show(Articles $articles) : Response 
+    {
+        return $this->render('pages/articles/show.html.twig', [
+            'articles' => $articles
+        ] );
+    }
     
     // route qui sera marqué dans la barre du navigateur
     #[Route('/articles/nouveau', 'articles.new', methods: ['GET', 'POST'])]
