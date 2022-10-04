@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ArticlesController extends AbstractController
 {
     // Designation de la routte
-    #[Route('/articles', name: 'app_articles', methods : ['GET'])]
+    #[Route('/articles', name: 'app_articles', methods: ['GET'])]
     // autoriser que les utilisateurs inscris
     #[IsGranted('ROLE_USER')]
     // Affichage de tous les article dans un pableau sur la page articles
@@ -37,17 +37,37 @@ class ArticlesController extends AbstractController
             // on les classe 5 par page
             $request->query->getInt('page', 1),
             5,
-
-
         );
-
-
         return $this->render('pages/articles/index.html.twig', [
             'articles' => $articles
-
         ]);
     }
-    
+    #[Route('/articles/public',  name: 'app_public', methods: ['GET'])]
+    public function articlesPublic(
+        ArticlesRepository $repository,
+        PaginatorInterface $paginator,
+        Request $request
+    ) : Response
+    {
+        $articles = $paginator->paginate(
+            $repository->findPublicArticle(null),
+            // on les classe 5 par page
+            $request->query->getInt('page', 1),
+            4,
+        );
+        return $this->render('pages/articles/articlesPublic.html.twig', [
+            'articles' => $articles
+        ]);
+    }
+    #[Security("is_granted('ROLE_USER') and (articles.getIsPublic() === true || user === articles.getUser())")]
+    #[Route('/articles/{id}', 'articles.show', methods: ['GET'])]
+    public function show(Articles $articles): Response
+    {
+        return $this->render('pages/articles/show.html.twig', [
+            'articles' => $articles
+        ]);
+    }
+
     // route qui sera marqué dans la barre du navigateur
     #[Route('/articles/nouveau', 'articles.new', methods: ['GET', 'POST'])]
     // création d'un nouvel article et envoie en bdd
@@ -60,7 +80,7 @@ class ArticlesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $article = $form->getData();
-          $article -> setUser( $this-> getUser());
+            $article->setUser($this->getUser());
             // persist = on met dans la boite
             $manager->persist($article);
             //    flush on envoie vers la bdd
@@ -77,11 +97,11 @@ class ArticlesController extends AbstractController
         ]);
     }
     // création d'une fonction pour modifier un article
-     // Seul le redacteur de l'article peut le modifier
-     #[Security("is_granted('ROLE_USER') and user === article.getUser()")]
+    // Seul le redacteur de l'article peut le modifier
+    #[Security("is_granted('ROLE_USER') and user === article.getUser()")]
     // route qui sera marqué dans la barre du navigateur
     #[Route('/articles/edition/{id}', 'articles.edit', methods: ['GET', 'POST'])]
-   
+
     // Pas la peine de chercher par l'id avec symfony car il le fait en automatique
     //  public function edit(ArticlesRepository $repository, int $id): Response
     public function edit(Articles $article, Request $request, EntityManagerInterface $manager): Response
@@ -111,20 +131,20 @@ class ArticlesController extends AbstractController
 
     // Supprimer un article
     // route du navigateur
-     // Seul le redacteur de l'article peut le supprimer
-     #[Security("is_granted('ROLE_USER') and user === article.getUser()")]
+    // Seul le redacteur de l'article peut le supprimer
+    #[Security("is_granted('ROLE_USER') and user === article.getUser()")]
     #[route('/articles/suppression/{id}', 'articles.delete', methods: ['GET'])]
-    public function delete( EntityManagerInterface $manager, Articles $article) : Response
+    public function delete(EntityManagerInterface $manager, Articles $article): Response
     {
-      $manager->remove($article) ;
-      $manager->flush();
-      $this->addFlash(
-        'danger',
-        'Hop poubelle ! Bon débarras!! '
-        
-    );
-    
-    
-      return $this->redirectToRoute('app_articles');
+        $manager->remove($article);
+        $manager->flush();
+        $this->addFlash(
+            'danger',
+            'Hop poubelle ! Bon débarras!! '
+
+        );
+
+
+        return $this->redirectToRoute('app_articles');
     }
 }
