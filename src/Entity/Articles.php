@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticlesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -42,6 +44,7 @@ class Articles
 public function __construct()
 {
     $this->createdAt =new \DateTimeImmutable();
+    $this->marks = new ArrayCollection();
 }
     #[ORM\Column(nullable: true)]
     
@@ -53,6 +56,9 @@ public function __construct()
 
     #[ORM\Column]
     private ?bool $isPublic = false;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Mark::class, orphanRemoval: true)]
+    private Collection $marks;
 
     public function getId(): ?int
     {
@@ -142,5 +148,37 @@ public function __construct()
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Mark>
+     */
+    public function getMarks(): Collection
+    {
+        return $this->marks;
+    }
+
+    public function addMark(Mark $mark): self
+    {
+        if (!$this->marks->contains($mark)) {
+            $this->marks->add($mark);
+            $mark->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMark(Mark $mark): self
+    {
+        if ($this->marks->removeElement($mark)) {
+            // set the owning side to null (unless already changed)
+            if ($mark->getArticle() === $this) {
+                $mark->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+     
 }
 

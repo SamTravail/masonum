@@ -47,8 +47,7 @@ class ArticlesController extends AbstractController
         ArticlesRepository $repository,
         PaginatorInterface $paginator,
         Request $request
-    ) : Response
-    {
+    ): Response {
         $articles = $paginator->paginate(
             $repository->findPublicArticle(null),
             // on les classe 5 par page
@@ -59,17 +58,17 @@ class ArticlesController extends AbstractController
             'articles' => $articles
         ]);
     }
-    #[Security("is_granted('ROLE_USER') and (articles.getIsPublic() === true || user === articles.getUser())")]
+    //#[Security("is_granted('ROLE_USER') and (articles.getIsPublic() === true || user === articles.getUser())")]
     #[Route('/articles/{id}', 'articles.show', methods: ['GET'])]
-    public function show(Articles $articles): Response
-    {
-        return $this->render('pages/articles/show.html.twig', [
-            'articles' => $articles
-        ]);
-    }
+    // public function show(Articles $articles): Response
+    // {
+    //     return $this->render('pages/articles/show.html.twig', [
+    //         'articles' => $articles
+    //     ]);
+    // }
 
     // route qui sera marqué dans la barre du navigateur
-    #[Route('/articles/nouveau', 'articles.new', methods: ['GET', 'POST'])]
+    #[Route('/articles/nouveau', 'articles_new', methods: ['GET', 'POST'])]
     // création d'un nouvel article et envoie en bdd
     public function new(Request $request, EntityManagerInterface $manager): Response
     {

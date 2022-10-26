@@ -10,11 +10,17 @@
 					<a class="nav-link active" href="{{ path('home') }}">Accueil
 						<span class="visually-hidden">(current)</span>
 					</a>
-				</li>			
-
-				<li class="nav-item ">
-					<a class="nav-link" href="{{ path('app_articles') }}">Articles</a>
 				</li>
+				<div class="btn-group" role="group">
+					<button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Articles
+					</button>
+					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="margin-top : 2.5rem;">
+						<a class="dropdown-item" href="{{ path('app_articles') }}">Mes articles</a>
+						<a class="dropdown-item" href="{{ path('app_public') }}">Les articles publics</a>
+					</div>
+				</div>
+
 				<div class="btn-group" role="group">
 					<button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Cours
@@ -31,29 +37,30 @@
 					<li class="nav-item ">
 						<a class="nav-link" href="#">Lexique</a>
 					</li>
-          {# condition si user connecté #}
-		
+					{# condition si user connecté #}
+
+					<li class="nav-item ">
+						<a class="nav-link" href="#">Astuces</a>
+					</li>
+					<div class="btn-group" role="group">
+						<button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Jeux pour se défouler
+						</button>
+						<div class="dropdown-menu" aria-labelledby="btnGroupDrop2" style="margin-top:2.5rem; ">
+							<a class="dropdown-item" href="#">Jeu con</a>
+							<a class="dropdown-item" href="#">Jeu très con</a>
+							<a class="dropdown-item" href="#">Jeu hight level</a>
+						</div>
 						<li class="nav-item ">
-							<a class="nav-link" href="#">Astuces</a>
+							<a class="nav-link" href="#">Communauté</a>
 						</li>
-						<div class="btn-group" role="group">
-							<button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Jeux pour se défouler
-							</button>
-							<div class="dropdown-menu" aria-labelledby="btnGroupDrop2" style="margin-top:2.5rem; ">
-								<a class="dropdown-item" href="#">Jeu con</a>
-								<a class="dropdown-item" href="#">Jeu très con</a>
-								<a class="dropdown-item" href="#">Jeu hight level</a>
-							</div>
-							<li class="nav-item ">
-								<a class="nav-link" href="#">Communauté</a>
-							</li>
-						
+
 					</div>
 				</ul>
 				<div class="d-flex">
-					<ul class="navbar-nav me-auto">
-          {# condition si user connecté #}
+					<ul
+						class="navbar-nav me-auto">
+						{# condition si user connecté #}
 						{% if app.user %}
 
 							<div class="btn-group" role="group">
