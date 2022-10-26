@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}modif{% endblock %}
+
+{% block body %}
+<div class="container">
+{% for message in app.flashes('warning') %}
+				<div class='alert alert-danger mt-4'>
+					{{message}}
+				</div>
+			{% endfor %}
+		<h1 class="mt-4">Un truc ou deux à modifier ?</h1>
+
+		{{ form(form) }}
+
+		</div>
+{% endblock %}

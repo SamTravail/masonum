@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maso-Numérique  -Articles
+{% endblock %}
+
+{% block body %}
+	<div
+		class="container mt-4">
+		{# condition pour dire si il y a un  ou plusieurs articles ont les affiche sinon on affiche un message indiquant qu'il n 'y a pas d'article #}
+		{% if not articles.items is same as ([]) %}
+			<h1>
+				Articles</h1>
+
+				{# création bouton écrire un article on met un path pour si l'adresse change automatiquement la route change sans erreur #}
+				<a href="{{ path('articles.new') }}" class="btn btn-info">Ecrire un nouvel Article</a>
+			{# alerte pour iindiquer que l'article a été créé avec succès #}
+			{% for message in app.flashes('success') %}
+				<div class='alert alert-danger mt-4'>
+					{{message}}
+				</div>
+			{% endfor %}
+			{% for message in app.flashes('warning') %}
+				<div class='alert alert-danger mt-4'>
+					{{message}}
+				</div>
+			{% endfor %}
+			
+			{# vatiable pour indiquer le nombre d'article #}
+			<div class="count mt-4">
+				Il y a
+				{{ articles.getTotalItemCount }}
+				articles.
+			</div>
+			{# tavleau pour ranger les articles le premier déclare le tableau le deuxième injecte les datas #}
+			<table class="table table-hover mt-4">
+				<thead>
+					<tr>
+						<th scope="col">Numéro</th>
+						<th scope="col">Titre</th>
+						<th scope="col">Contenu</th>
+						<th scope="col">Auteur</th>
+						<th scope="col">Date de publication</th>
+						<th scope="col">Edition</th>
+						<th scope="col">Suppression</th>
+					</tr>
+				</thead>
+				<tbody>
+					{# Création d'un boucle pour afficher tous les articles #}
+					{% for article in articles %}
+						<div>
+							<tr class="table-info mt-4">
+								<th scope="row">{{article.id}}</th>
+								<td>{{article.title}}</td>
+								<td>{{article.content}}</td>
+								<td>{{article.auteur}}</td>
+								<td>{{article.createdAt|date('d/m/Y')}}</td>
+								{# |date('d/m/yy') filtre obligatoire pour que la date soit interrprétée par twig #}
+								<td>
+								<a href="{{ path('articles.edit', { id: article.id}) }}" class="btn btn-success">Modifier</a>
+								</td>
+								<td>
+								<a href="{{ path('articles.delete', { id: article.id}) }}" class="btn btn-primary">Supprimer</a>
+								</td>
+							</tr>
+							<div class="navigation"></div>
+						</div>
+
+					{% endfor %}
+				</tbody>
+			</table>
+			{# pagination #}
+			<div class="navigation-info mt-4">
+				{{ knp_pagination_render(articles) }}
+			</div>
+		{% else %}
+			{# fin de la condition si il n'y a pas d'article #}
+			<h4>
+				Il n'y a pas d'article. Mets toi au travail Féniasse !!!! </h4>
+
+				{# création bouton écrire un article on met un path pour si l'adresse change automatiquement la route change sans erreur #}
+				<a href="{{ path('articles.new') }}" class="btn btn-info mt-4">Ecrire un nouvel Article</a>
+
+		{% endif %}
+	</div>
+{% endblock %}
