@@ -4,30 +4,43 @@ namespace App\Entity;
 
 use App\Repository\MarkRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MarkRepository::class)]
+#[UniqueEntity(
+    fields: ['user', 'article'],
+    errorPath: 'user',
+    message: 'Cet utilisateur a déjà noté cette recette.'
+)]
 class Mark
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $mark = null;
+    #[ORM\Column(type: 'integer')]
+    #[Assert\Positive()]
+    #[Assert\LessThan(6)]
+    private int $mark;
 
-    #[ORM\ManyToOne(inversedBy: 'marks')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'marks')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $user = null;
+    private User $user;
 
-    #[ORM\ManyToOne(inversedBy: 'marks')]
+    #[ORM\ManyToOne(targetEntity: Articles::class, inversedBy: 'marks')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Articles $article = null;
+    private Articles $article;
 
-    // public function_construct()
-    // {
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $createdAt;
 
-    // }
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,26 +58,38 @@ class Mark
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getArticle(): ?Articles
+    public function getArticles(): ?Articles
     {
         return $this->article;
     }
 
-    public function setArticle(?Articles $article): self
+    public function setArticles(?Articles $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

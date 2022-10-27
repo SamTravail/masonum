@@ -2,25 +2,36 @@
 
 {% block title %}
 	Maso-Numérique  -
-	{{ articles.title}}
+	{{ article.title}}
 {% endblock %}
 
 {% block body %}
 	<div class="container">
-		<h1 class="mt-4">{{ articles.title}}</h1>
-
+		{% for message in app.flashes('warning') %}
+			<div class='alert alert-danger mt-4'>
+				{{message}}
+			</div>
+		{% endfor %}
+		<h1 class="mt-4">{{ article.title}}</h1>
+		<p>
+			Cet article à une note de
+			{{article.moyenne}}
+			/5</p>
 		<p class="mt-4">
-			{{articles.content}}</p>
+			{{article.content}}</p>
 		<p class="mt-4">
 			Auteur :
-			{{ articles.auteur}}</p>
+			{{ article.auteur}}</p>
 		<p class="mt-4">Edité le :
-			{{articles.createdAt|date('d/m/Y')}}</p>
-		{% if articles.modifiedAt %}
+			{{article.createdAt|date('d/m/Y')}}</p>
+		{% if article.modifiedAt %}
 			<p class="mt-4">Modifié le :
-				{{articles.modifiedAt|date('d/m/Y')}}</p>
+				{{article.modifiedAt|date('d/m/Y')}}</p>
 		{% else %}
 			<p></p>
 		{% endif %}
 	</div>
-{% endblock %}
+	<div class='moyenne'>
+		{{form(form)}}
+		</div>
+	{% endblock %}

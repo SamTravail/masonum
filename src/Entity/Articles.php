@@ -19,6 +19,8 @@ class Articles
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+ 
+
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
@@ -38,6 +40,8 @@ class Articles
 
     #[ORM\Column]
     #[Assert\NotBlank()]
+ 
+
 
     
     private ?\DateTimeImmutable $createdAt = null;
@@ -59,7 +63,7 @@ public function __construct()
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Mark::class, orphanRemoval: true)]
     private Collection $marks;
-
+    private ?float $moyenne = null;
     public function getId(): ?int
     {
         return $this->id;
@@ -152,16 +156,16 @@ public function __construct()
     /**
      * @return Collection<int, Mark>
      */
-    public function getMarks(): Collection
+    public function getMark(): Collection
     {
         return $this->marks;
     }
-
+    
     public function addMark(Mark $mark): self
     {
         if (!$this->marks->contains($mark)) {
             $this->marks->add($mark);
-            $mark->setArticle($this);
+            $mark->setArticles($this);
         }
 
         return $this;
@@ -171,12 +175,30 @@ public function __construct()
     {
         if ($this->marks->removeElement($mark)) {
             // set the owning side to null (unless already changed)
-            if ($mark->getArticle() === $this) {
-                $mark->setArticle(null);
+            if ($mark->getArticles() === $this) {
+                $mark->setArticles(null);
             }
         }
 
         return $this;
+    }
+    public function getMoyenne()
+    {
+        $marks = $this->marks;
+
+        if ($marks->toArray() === []) {
+            $this->moyenne = null;
+            return $this->moyenne;
+        }
+
+        $total = 0;
+        foreach ($marks as $mark) {
+            $total += $mark->getMark();
+        }
+
+        $this->moyenne = $total / count($marks);
+
+        return $this->moyenne;
     }
 
      

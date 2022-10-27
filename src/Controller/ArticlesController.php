@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
+use App\Entity\Mark;
 use App\Form\ArticleType;
+use App\Form\MarkType;
 use App\Repository\ArticlesRepository;
+use App\Repository\MarkRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\OrderBy;
@@ -58,14 +61,7 @@ class ArticlesController extends AbstractController
             'articles' => $articles
         ]);
     }
-    //#[Security("is_granted('ROLE_USER') and (articles.getIsPublic() === true || user === articles.getUser())")]
-    #[Route('/articles/{id}', 'articles.show', methods: ['GET'])]
-    // public function show(Articles $articles): Response
-    // {
-    //     return $this->render('pages/articles/show.html.twig', [
-    //         'articles' => $articles
-    //     ]);
-    // }
+    
 
     // route qui sera marqué dans la barre du navigateur
     #[Route('/articles/nouveau', 'articles_new', methods: ['GET', 'POST'])]
@@ -146,4 +142,50 @@ class ArticlesController extends AbstractController
 
         return $this->redirectToRoute('app_articles');
     }
+
+
+    #[Security("is_granted('ROLE_USER') and (article.getIsPublic() === true || user === article.getUser())")]
+    #[Route('/articles/{id}', 'articles.show', methods: ['GET', 'POST'])]
+     public function show(Articles $article, Request $request,  MarkRepository $markRepository,
+     EntityManagerInterface $manager
+): Response
+// Mise en place du systeme de notation . avec une nouvelle note
+     { $mark = new Mark();
+        $form = $this-> createForm(MarkType::class, $mark);
+        $form ->handleRequest($request);
+        //  si le formulaire est submit et valid
+        if($form-> isSubmitted() && $form ->isValid() ){
+            
+            // attacher à un utilisateur
+            $mark->setUser($this->getUser())
+            ->setArticles($article);
+//  Pour verifier que l'utilisateur n'a pas encore noté l'article
+        $existingMark = $markRepository->findOneBy([
+            'user' => $this->getUser(),
+            'article' => $article
+        ]);
+
+        if (!$existingMark) {
+            $manager->persist($mark);
+        } else {
+            // changer la note deja donnée si le user a deja noter l article
+            $existingMark->setMark(
+                $form->getData()->getMark()
+            );
+        }
+
+        $manager->flush();
+// valider et afficher une alerte pour confirmer la note
+        $this->addFlash(
+            'success',
+            'Votre note a bien été prise en compte.'
+        );
+
+        return $this->redirectToRoute('articles.show', ['id' => $article->getId()]);
+    }        
+         return $this->render('pages/articles/show.html.twig', [
+             'article' => $article,
+             'form' => $form -> createView()
+         ]);
+     }
 }
