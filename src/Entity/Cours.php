@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CoursRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CoursRepository::class)]
@@ -10,20 +11,32 @@ class Cours
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private ?int $id;
 
     #[ORM\Column(length: 50)]
-    private ?string $titre = null;
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50)]
+    private $titre;
 
     #[ORM\Column(length: 1500)]
-    private ?string $contenu = null;
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 50, max: 1500)]
+    private $contenu;
 
     #[ORM\Column(length: 50)]
-    private ?string $auteur = null;
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50)]
+    private $auteur;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $dateCreation = null;
+    #[ORM\Column(type: 'datetime_immutable')]
+    #[Assert\NotNull()]
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
