@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 
 use App\Entity\Articles;
+use App\Entity\Cours;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -27,7 +28,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-           // users
+            // Fixtures pour les users
            $users = [];
            for ($k = 0; $k < 10; $k++) {
 
@@ -40,8 +41,9 @@ class AppFixtures extends Fixture
             $users[] = $user;
             $manager->persist($user);
         }
+         // Fixtures pour les articles
         $articles = [];
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 20; $i++) {
 
             $article = new Articles();
             $article->setTitle($this->faker->word(2))
@@ -51,6 +53,18 @@ class AppFixtures extends Fixture
                 ->setIsPublic(mt_rand(0, 1) == 1 ? true : false);
                 $articles[] = $article;
                 $manager->persist($article);
+        }
+        // Fixtures pour les cours
+        $cours = [];
+        for ($i = 0; $i < 20; $i++) {
+
+            $cour = new Cours();
+            $cour->setTitre($this->faker->word(2))
+                ->setContenu($this->faker->word(200))
+                ->setAuteur($this->faker->lastName());
+                //->setDateCreation();
+            $cours[] = $cour;
+            $manager->persist($cour);
         }
 
 
