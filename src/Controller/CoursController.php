@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Cours;
+use App\Form\CoursType;
 use App\Repository\CoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -17,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CoursController extends AbstractController
 {
     #[Route('/cours', name: 'app_cours')]
-    public function index(CoursRepository $cours,PaginatorInterface $paginator,
+    public function index(CoursRepository $repository,PaginatorInterface $paginator,
     Request $request): Response
     {
         $cours = $paginator->paginate(
