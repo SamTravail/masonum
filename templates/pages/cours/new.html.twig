@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">Création d'un Cours</h1>
+
+        {{ form_start(form) }}
+
+        <div class="form-group">
+            {{ form_label(form.titre) }}
+            {{ form_widget(form.titre) }}
+            <div class="form-error">
+                {{ form_errors(form.titre) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.contenu) }}
+            {{ form_widget(form.contenu) }}
+            <div class="form-error">
+                {{ form_errors(form.contenu) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.auteur) }}
+            {{ form_widget(form.auteur) }}
+            <div class="form-error">
+                {{ form_errors(form.auteur) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.rubrique) }}
+            {{ form_widget(form.rubrique) }}
+            <div class="form-error">
+                {{ form_errors(form.rubrique) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_row(form.submit) }}
+        </div>
+
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

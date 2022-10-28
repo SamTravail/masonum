@@ -2,17 +2,58 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Cours;
+use App\Form\CoursType;
+use App\Repository\CoursRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+
+
 
 class CoursController extends AbstractController
 {
     #[Route('/cours', name: 'app_cours')]
-    public function index(): Response
+    public function index(CoursRepository $repository,PaginatorInterface $paginator,
+    Request $request): Response
     {
+        $cours = $paginator->paginate(
+            $repository->findAll(),
+            $request->query->getInt('page',1),
+            10
+        );
         return $this->render('pages/cours/index.html.twig', [
-            'controller_name' => 'CoursController',
+            'cours' => $cours,
+        ]);
+    }
+
+    #[Route('/cours/nouveau', 'cours.new', methods: ['GET', 'POST'])]
+    public function new(
+        Request $request,
+        EntityManagerInterface $manager
+    ) : Response
+    {
+        $cours = new Cours();
+        $form = $this->createForm(CoursType::class, $cours);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $cours =$form->getData();
+
+            $manager->persist($cours);
+            $manager->flush();
+
+
+
+        }
+
+        return $this->render('pages/cours/new.html.twig',[
+            'form' => $form->createView()
         ]);
     }
 }
