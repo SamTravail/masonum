@@ -24,6 +24,9 @@
 								Edité le :
 								{{article.createdAt|date('d/m/Y')}}</h6>
 						</div>
+						<div>
+						<a href="{{ path('articles.show', { id: article.id}) }}" class="btn btn-info">voir</a>
+					</div>
 					</div>
 				{% endfor %}
 			</div>
