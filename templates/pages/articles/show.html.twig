@@ -7,15 +7,17 @@
 
 {% block body %}
 	<div class="container">
-		{% for message in app.flashes('warning') %}
-			<div class='alert alert-danger mt-4'>
-				{{message}}
-			</div>
-		{% endfor %}
+		{% for message in app.flashes('success') %}
+				<div class='alert alert-danger mt-4'>
+					{{message}}
+				</div>
+			{% endfor %}
+			
 		<h1 class="mt-4">{{ article.title}}</h1>
+		
 		<p>
 			Cet article à une note de
-			{{article.moyenne}}
+			{{article.moyenne |round(1, 'floor')}}
 			/5</p>
 		<p class="mt-4">
 			{{article.content}}</p>
@@ -27,7 +29,7 @@
 		{% if article.modifiedAt %}
 			<p class="mt-4">Modifié le :
 				{{article.modifiedAt|date('d/m/Y')}}</p>
-				
+
 		{% else %}
 			<p></p>
 		{% endif %}
