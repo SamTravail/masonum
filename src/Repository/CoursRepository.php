@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Cours;
-use Knp\Component\Pager\PaginatorInterface;
+//use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\CoursRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CoursRepository::class)]
+#[UniqueEntity('titre')]
 class Cours
 {
     #[ORM\Id]
