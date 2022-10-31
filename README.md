@@ -2,91 +2,136 @@
 
 
 
-## Getting started
+## DESCRIPTION
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Nous avons créée un site s'adressant aux jeunes développeurs mais pas que.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Pendant notre formation, nous aavons fait le constat que peu de sites expliquauent le code avec des mots simples.
+ils y a une infinité de sites expliquant les bases su code mais beaucoup sont soit difficile d'accès et parlent aux developpeurs confirmés, soit le code est 'sale'.
+Pour un débutant les docs sont difficiles à comprendre.
 
-## Add your files
+C'est pour cela que nous nous sommes posés la problèmatique suivant :
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Le code peut-il être expliqué avec simplicité afin que tout le monde puisse développer une application ?
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/michee/masonum.git
-git branch -M main
-git push -uf origin main
-```
+En collaboration avec des youtubeurs, et en s'appuyant sur la documentation officielle, nous avons mis en place des cours, des astuces, un lexique ainsi que des articles.
+Vidéos Tutos, schématisation et résolutions de problèmes que nous avons rencontré au cours de notre apprentissage rempliront les différentes rubriques de ce site.
 
-## Integrate with your tools
+## DESCRIPTION DES DIFFERENTES PAGES
 
-- [ ] [Set up project integrations](https://gitlab.com/michee/masonum/-/settings/integrations)
+La page d'accueil : 
+- La page d'acceuil présentera les fonctionnalités en navigation
+- Les 3 derniers articles publics, cours publics et astuces publiques y seront visibles
+- Une fonction renvoye vers la page d'inscription.
+- un footer avec les informations obligatoires
 
-## Collaborate with your team
+## Les articles : 
+Un article est défini par :
+-catégorie
+-un titre
+-un contenu
+-un auteur
+-du date de création ou de modification.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Le titre pas plus de 50 caractère.
+Le contenu entre 100 et 200000 caractères.
+Les dates sont automatiquement générées et format français.
+Les articles sont notés par les utilisateurs
 
-## Test and Deploy
+## Les cours et les astuces:
+Un cours est définie par:
+-un titre
+-un contenu
+-un auteur
+-une date de création ou de modification.
 
-Use the built-in continuous integration in GitLab.
+Le titre pas plus de 50 caractères
+Le contenu entre 20 et 1500 caractères
+Les dates devront être automatiquement générées.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Une page d'accueil astuce offre 3 choix front, Back et autres.
+le btn front renverra à la page coursFront
+le btn back renverra à la page coursBack
+et la page autre renverra à des astuce ni front ni Back par exemple commande clavier ou vscode.
+Les cours et les articles sont notés par les utilisateurs.
 
-***
+## Le lexique:
+Un lexique sera défini par :
+-un mot
+-un définition
+-un auteur
+-du date de création ou de modification.
 
-# Editing this README
+Le mot pas plus de 50 caractère.
+Lla définition entre 5 et 200000 caractères.
+Les dates devront être automatiquement générées et format français.
+Les mots sont classés par ordre aphalbétique
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## FONCTIONNALITES
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+## Sécurité et compte utilisateur
 
-## Name
-Choose a self-explaining name for your project.
+Un compte utilisateur est défini par :
+-un nom
+-un prénom
+-1 pseudo
+- une adresse mail
+- un mot de passe
+-1 date de création
+- une date de modification si modification il y a
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Nom et prénom obligatoire. Ils ont entre 2 et 30 caractères.
+Le pseudo est facultatif. S'il est renseigné il doit faire entre 5 et 30 caractères.
+L'adresse mail est unique et sert d'identifiant lors de la connection.
+Le mot de passe est encodé en bdd pour des questions de sécurité.
+La date de création est générée aussi automatiquement lors de la modification du profil.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## Gestion des pages
+Le but ici est d'interdire l'accès à certaines pages en fonction de certains critères.
+=> page d'accueil : Accessible à tout le monde
+=> Page de connexion : utilisateurs
+=> Page d'inscription : Tout le monde
+=> Les articles : uniquement les utilisateurs connectés
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+=> Création d'un article : Rédacteur
+=> Editer un article : auteur de l'article, modérateur, admin
+=> Supprimer un article : auteur de l'article, modérateur, admin
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+=> Création d'une astuce : Rédacteur
+=> Editer u astuce : auteur de l'astuce, modérateur, admin
+=> Supprimer une astuce : auteur de l'astuce, modérateur, admin
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Faire des redirection si un utilisateur se rend sur une page interdite
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+## Partage d'un article, d'une astuces ou d'un cours
+Un utilisateur rédacteur aura à disposition un champs, pour chaque article,  astuce ou cours, lui permettant de choisir si celui en question est disponible pour l'ensemble de la communauté.
+Si l'article,  astuce ou cours, est rendu public, alors les utilisateurs pourront le consulter.
+Sinon il ne pourra être consulté que par le rédacteur de l'article, le modérateur et l'admin
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Noter l'article, l'astuce ou le cours
+Cette fonctionnalité va permettre aux différents utilisateurs de noter les articles,  astuces ou cours mis en public sur l'application. Une fois l'article, astuce ou cours mis en mode public, il est éligible aux votes des utilisateurs
+Un utilisateur connecté pourra donner une note entre 1 et 5. L'ensemble des notes feront une moyenne, et les utilisateurs pourront voir cette moyenne sur la page article, astuce ou cours.
+Un utilisateur ne pourra pas noter son propre article, astuce ou cours.
+Un utilisateur ne pourra pas noter deux fois le même article, astuce ou cours.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## Formulaire de contact
+Cette fonctionnalité consiste en l'implémentation d'un formulaire de contact classique.
+Ce formulaire contient :
+- un nom
+- un prénom
+- une adresse mail
+- un sujet
+- un message
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Le nom et le prénom sont optionnels. Ils contiennent entre 2 et 50 caractères.
+l'adresse mail est obligatoire, comme le message. 
+Le sujet est lui optionnel, et contient maximum 150 caractères.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Si l'utilisateur est connecté, alors son nom, prénom et mail seront automatiquement remplis.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Le formulaire contient également un système de reCaptcha.
 
-## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+
+
+
