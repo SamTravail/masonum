@@ -13,9 +13,12 @@
 				</div>
 			{% endfor %}
 			
-		<h1 class="mt-4">{{ article.title}}</h1>
-		
-		<p>
+		<h1 class="mt-4 text-center">{{ article.title}}</h1>
+		<div class="articles__image text-center mt-4">
+			<img style="max-width: 500px; " src="{{ vich_uploader_asset(article, 'imageFile') }}">
+		</div>
+
+		<p class="mt-4">
 			Cet article à une note de
 			{{article.moyenne |round(1, 'floor')}}
 			/5</p>
@@ -33,8 +36,9 @@
 		{% else %}
 			<p></p>
 		{% endif %}
-	</div>
-	<div class='moyenne'>
+		<div class='moyenne'>
 		{{form(form)}}
 		</div>
+	</div>
+	
 	{% endblock %}

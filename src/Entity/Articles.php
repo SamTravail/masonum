@@ -5,12 +5,14 @@ namespace App\Entity;
 use App\Repository\ArticlesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticlesRepository::class)]
+#[Vich\Uploadable]
 #[UniqueEntity('title', 'Le titre est déja utilisé. Merci de changer.')]
 #[UniqueEntity('content', 'Mais t\'es grave toi ! Deux fois le même contenu c\'est louche... Recommence !!!!')]
 
@@ -27,6 +29,11 @@ class Articles
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 50)]
     private ?string $title = null;
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(type: 'string', nullable:true)]
+    private ?string $imageName = null;
 
     #[ORM\Column(length: 10000)]
     #[Assert\NotBlank()]
@@ -39,12 +46,12 @@ class Articles
     private ?string $auteur = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank()]
- 
-
-
-    
+    #[Assert\NotBlank()]    
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[Assert\NotBlank()]
+    #[ORM\Column(type: 'datetime_immutable', nullable:true)]
+    private ?\DateTimeInterface $updatedAt = null;
 public function __construct()
 {
     $this->createdAt =new \DateTimeImmutable();
@@ -79,6 +86,31 @@ public function __construct()
         $this->title = $title;
 
         return $this;
+    }
+    
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+           
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
     }
 
     public function getContent(): ?string

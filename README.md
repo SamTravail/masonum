@@ -1,4 +1,4 @@
-# masonum
+# MASO-NUMERIQUE
 
 
 
@@ -6,8 +6,8 @@
 
 Nous avons créée un site s'adressant aux jeunes développeurs mais pas que.
 
-Pendant notre formation, nous aavons fait le constat que peu de sites expliquauent le code avec des mots simples.
-ils y a une infinité de sites expliquant les bases su code mais beaucoup sont soit difficile d'accès et parlent aux developpeurs confirmés, soit le code est 'sale'.
+Pendant notre formation, nous avons fait le constat que peu de sites expliquauent le code avec des mots simples.
+Ils y a une infinité de sites expliquant les bases du code mais beaucoup sont soit difficile d'accès et parlent aux developpeurs confirmés, soit le code est 'sale'.
 Pour un débutant les docs sont difficiles à comprendre.
 
 C'est pour cela que nous nous sommes posés la problèmatique suivant :
